@@ -11,6 +11,7 @@
 #include <iostream>
 #include <string>
 #include <cassert>
+#include <cstring>
 
 #ifndef SCALE_FACTOR_DEF
 #define SCALE_FACTOR_DEF

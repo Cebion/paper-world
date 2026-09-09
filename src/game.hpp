@@ -128,7 +128,11 @@ public:
     {
         std::cout << "Initializing...\n";
         bool success {true};
+#ifdef PORTMASTER_BUILD
+        _Window = SDL_CreateWindow("Defblade", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE | SDL_WINDOW_FULLSCREEN_DESKTOP);
+#else
         _Window = SDL_CreateWindow("Defblade", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
+#endif
         if (_Window == NULL)
         {
             std::cout << "INIT::ERROR Failed to create SDL_Window! SDL_Error: " << SDL_GetError() << '\n';
@@ -148,7 +152,11 @@ public:
                 success = false;
             }
         }
+#ifdef PORTMASTER_BUILD
+        _Renderer = SDL_CreateRenderer(_Window, -1, SDL_RENDERER_SOFTWARE);
+#else
         _Renderer = SDL_CreateRenderer(_Window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+#endif
         if (_Renderer == NULL)
         {
             std::cout << "INIT::ERROR Failed to create SDL_Renderer! SDL_Error: " << SDL_GetError() << '\n';
